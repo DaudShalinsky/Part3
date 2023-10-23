@@ -1,0 +1,1 @@
+﻿ArrayInversion.Start();
