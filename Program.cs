@@ -1,1 +1,1 @@
-﻿ArrayInversion.Start();
+﻿Ameba.Start();
