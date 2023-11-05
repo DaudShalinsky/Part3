@@ -1,1 +1,1 @@
-﻿Ameba.Start();
+﻿WeatherInformation.Start();
