@@ -20,13 +20,11 @@ public static class WeatherInformation
             Console.WriteLine($"__{precipitation[i]}");
         }
 
-        int averageTemperature = 0;
+        decimal averageTemperature = 0;
         //Расчитываем среднюю месячную температуру
-        do
-        {
+    
             for (int i = 0; i < temperatures.Length; i++)
             { averageTemperature += temperatures[i]; }
-        } while (temperatures.Length < 30);
 
         averageTemperature /= temperatures.Length;
 
@@ -34,47 +32,25 @@ public static class WeatherInformation
 
 
         //Расчет общего количества осадков за месяц
-        int precipitations = 0;
-        do
-        {
+        decimal precipitations = 0;
+
             for (int i = 0; i < precipitation.Length; i++)
             { precipitations += precipitation[i]; }
-        } while (precipitation.Length < 30);
+
 
         Console.WriteLine(precipitations);
 
         //Среднее количество осадков за месяц
-        precipitations /= precipitation.Length;
+        precipitations /= (decimal)precipitation.Length;
 
         Console.WriteLine(precipitations);
 
 
         //Количество дней с количеством осадков выше среднего
-        int[] precipitationIsAboveAverage = { };
+        int[] precipitationIsAboveAverage = new int [30];
 
-        /*for (int i = 0; i < precipitation.Length; i++)
-        {
-            if (precipitation[i] > precipitations)
-            {
-                precipitationIsAboveAverage[i] = precipitation[i];
-                Console.WriteLine(precipitationIsAboveAverage.Length);
-            }
-        }*/
-
-
-        /*foreach (int c in precipitation)
-        {
-
-            if (c > precipitations)
-            {
-                for (int i = 0; i < 30; i++)
-                {
-                    precipitationIsAboveAverage[i] = c;
-
-                }
-            }
-        }*/
-        /*int x = 0;
+     
+        int x = 0;
         for (int i = 0; i < precipitation.Length; i++)
         {
             if (precipitation[i] > precipitations)
@@ -82,7 +58,7 @@ public static class WeatherInformation
                 x++;
                 precipitationIsAboveAverage[x] = precipitation[i];
             }
-        }*/
+        }
 
         
         Console.WriteLine(precipitationIsAboveAverage.Length);
