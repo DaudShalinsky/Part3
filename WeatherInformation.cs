@@ -4,53 +4,76 @@ public static class WeatherInformation
     {
         //Создаем два массива для указания температуры и количества осадков за месяц
         int[] temperatures = new int[30];
-        int[] precipitation = new int[30];
+        int[] precipitations = new int[30];
 
-        //Заполняем массив случайными числами
         Random number = new Random();
+
+        Console.WriteLine("Заполняем температуры");
         for (int i = 0; i < temperatures.Length; i++)
         {
             temperatures[i] = number.Next(-15, 40);
-            Console.WriteLine($"-- {temperatures[i]}");
+            Console.Write($"{temperatures[i]} ");
         }
 
-        for (int i = 0; i < precipitation.Length; i++)
+        Console.WriteLine();
+        Console.WriteLine("Заполняем осадки");
+        for (int i = 0; i < precipitations.Length; i++)
         {
-            precipitation[i] = number.Next(0, 10);
-            Console.WriteLine($"__{precipitation[i]}");
+            precipitations[i] = number.Next(0, 10);
+            Console.Write($"{precipitations[i]} ");
         }
 
-        decimal averageTemperature = 0;
-        //Расчитываем среднюю месячную температуру
-    
-            for (int i = 0; i < temperatures.Length; i++)
-            { averageTemperature += temperatures[i]; }
-
-        averageTemperature /= temperatures.Length;
-
+        Console.WriteLine();
+        Console.WriteLine("Расчитываем среднюю месячную температуру");
+        int totalTemperature = 0;
+        for (int i = 0; i < temperatures.Length; i++)
+        {
+            totalTemperature += temperatures[i];
+        }
+        int averageTemperature = totalTemperature / temperatures.Length;
         Console.WriteLine(averageTemperature);
 
+        Console.WriteLine("Расчет общего количества осадков за месяц");
+        int totalPrecipitations = 0;
+        for (int i = 0; i < precipitations.Length; i++)
+        {
+            totalPrecipitations += precipitations[i];
+        }
+        Console.WriteLine(totalPrecipitations);
 
-        //Расчет общего количества осадков за месяц
-        decimal precipitations = 0;
+        Console.WriteLine("Среднее количество осадков за месяц");
+        int averagePrecipitation = totalPrecipitations /= precipitations.Length;
+        Console.WriteLine(averagePrecipitation);
 
-            for (int i = 0; i < precipitation.Length; i++)
-            { precipitations += precipitation[i]; }
+        Console.WriteLine("Количество дней с количеством осадков выше среднего");
+        int[] daysWithAboveAveragePrecipitation = { };
 
-
-        Console.WriteLine(precipitations);
-
-        //Среднее количество осадков за месяц
-        precipitations /= (decimal)precipitation.Length;
-
-        Console.WriteLine(precipitations);
-
-
-        //Количество дней с количеством осадков выше среднего
-        int[] precipitationIsAboveAverage = new int [30];
-
-     
         int x = 0;
+        foreach (int precipitation in precipitations)
+        {
+            if (precipitation > averagePrecipitation)
+            {
+                Array.Resize(ref daysWithAboveAveragePrecipitation, daysWithAboveAveragePrecipitation.Length + 1);
+                daysWithAboveAveragePrecipitation[x] = precipitation;
+                x++;
+            }
+        }
+        Console.WriteLine(daysWithAboveAveragePrecipitation.Length);
+        Console.WriteLine(string.Join(" ", daysWithAboveAveragePrecipitation));
+
+        /*foreach (int c in precipitation)
+        {
+
+            if (c > precipitations)
+            {
+                for (int i = 0; i < 30; i++)
+                {
+                    precipitationIsAboveAverage[i] = c;
+
+                }
+            }
+        }*/
+        /*int x = 0;
         for (int i = 0; i < precipitation.Length; i++)
         {
             if (precipitation[i] > precipitations)
@@ -58,10 +81,9 @@ public static class WeatherInformation
                 x++;
                 precipitationIsAboveAverage[x] = precipitation[i];
             }
-        }
+        }*/
 
-        
-        Console.WriteLine(precipitationIsAboveAverage.Length);
+
 
 
 
