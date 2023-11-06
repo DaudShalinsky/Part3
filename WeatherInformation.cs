@@ -14,7 +14,6 @@ public static class WeatherInformation
             Console.WriteLine($"-- {temperatures[i]}");
         }
 
-        Random numbers = new Random();
         for (int i = 0; i < precipitation.Length; i++)
         {
             precipitation[i] = number.Next(0, 10);
@@ -50,7 +49,7 @@ public static class WeatherInformation
         Console.WriteLine(precipitations);
 
 
-        //Дни с количеством осадков выше среднего
+        //Количество дней с количеством осадков выше среднего
         int[] precipitationIsAboveAverage = { };
 
         /*for (int i = 0; i < precipitation.Length; i++)
