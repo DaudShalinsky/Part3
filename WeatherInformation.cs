@@ -6,7 +6,6 @@ public static class WeatherInformation
         int[] precipitations = new int[30];
 
         Random number = new Random();
-
         for (int i = 0; i < temperatures.Length; i++)
         {
             temperatures[i] = number.Next(-15, 40);
@@ -17,37 +16,13 @@ public static class WeatherInformation
         {
             precipitations[i] = number.Next(0, 10);
         }
-
         Console.WriteLine();
-        Console.WriteLine("Расчитываем среднюю месячную температуру");
-        int totalTemperature = 0;
-        for (int i = 0; i < temperatures.Length; i++)
-        {
-            totalTemperature += temperatures[i];
-        }
-        int averageTemperature = totalTemperature / temperatures.Length;
-        Console.WriteLine(averageTemperature);
 
-        int maxValue = temperatures.Max();
-        int maxIndex = temperatures.ToList().IndexOf(maxValue);
-        Console.WriteLine("Индекс самого жаркого дня в месяце: ");
-        Console.WriteLine(maxIndex);
-
-        int minValue = temperatures.Min();
-        int minIndex = temperatures.ToList().IndexOf(minValue);
-        Console.WriteLine("Индекс самого холодного дня в месяце: ");
-        Console.WriteLine(minIndex);
-
-
-        Console.WriteLine("Расчет общего количества осадков за месяц");
-        int totalPrecipitations = 0;
-        for (int i = 0; i < precipitations.Length; i++)
-        {
-            totalPrecipitations += precipitations[i];
-        }
-        Console.WriteLine(totalPrecipitations);
+        ShowAverageTemperature(temperatures);
+        ShowHotAndColdDayIndeces(temperatures);
 
         Console.WriteLine("Среднее количество осадков за месяц");
+        int totalPrecipitations = ShowAndReturnTotalPrecipitation(precipitations);
         int averagePrecipitation = totalPrecipitations / precipitations.Length;
         Console.WriteLine(averagePrecipitation);
 
@@ -59,9 +34,9 @@ public static class WeatherInformation
         {
             if (precipitation > averagePrecipitation)
             {
-                Array.Resize(ref daysWithAboveAveragePrecipitation, daysWithAboveAveragePrecipitation.Length + 1);
-                daysWithAboveAveragePrecipitation[x] = precipitation;
                 x++;
+                Array.Resize(ref daysWithAboveAveragePrecipitation, x);
+                daysWithAboveAveragePrecipitation[x - 1] = precipitation;
             }
         }
         Console.WriteLine(daysWithAboveAveragePrecipitation.Length);
@@ -76,6 +51,44 @@ public static class WeatherInformation
                 Console.Write($"{frostsAndHeavyPrecipitation}, ");
             }
         }
-
     }
+
+    private static int ShowAndReturnTotalPrecipitation(int[] precipitations)
+    {
+        Console.WriteLine("Расчет общего количества осадков за месяц");
+        int totalPrecipitations = 0;
+        for (int i = 0; i < precipitations.Length; i++)
+        {
+            totalPrecipitations += precipitations[i];
+        }
+        Console.WriteLine(totalPrecipitations);
+
+        return totalPrecipitations;
+    }
+
+    private static void ShowHotAndColdDayIndeces(int[] temperatures)
+    {
+        int maxValue = temperatures.Max();
+        int maxIndex = temperatures.ToList().IndexOf(maxValue);
+        Console.WriteLine("Индекс самого жаркого дня в месяце: ");
+        Console.WriteLine(maxIndex);
+
+        int minValue = temperatures.Min();
+        int minIndex = temperatures.ToList().IndexOf(minValue);
+        Console.WriteLine("Индекс самого холодного дня в месяце: ");
+        Console.WriteLine(minIndex);
+    }
+
+    private static void ShowAverageTemperature(int[] temperatures)
+    {
+        Console.WriteLine("Расчитываем среднюю месячную температуру");
+        int totalTemperature = 0;
+        for (int i = 0; i < temperatures.Length; i++)
+        {
+            totalTemperature += temperatures[i];
+        }
+        int averageTemperature = totalTemperature / temperatures.Length;
+        Console.WriteLine(averageTemperature);
+    }
+
 }
