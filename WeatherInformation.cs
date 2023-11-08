@@ -2,25 +2,20 @@ public static class WeatherInformation
 {
     public static void Start()
     {
-        //Создаем два массива для указания температуры и количества осадков за месяц
         int[] temperatures = new int[30];
         int[] precipitations = new int[30];
 
         Random number = new Random();
 
-        //Console.WriteLine("Заполняем температуры");
         for (int i = 0; i < temperatures.Length; i++)
         {
             temperatures[i] = number.Next(-15, 40);
-            //Console.Write($"{temperatures[i]} ");
         }
 
         Console.WriteLine();
-        //Console.WriteLine("Заполняем осадки");
         for (int i = 0; i < precipitations.Length; i++)
         {
             precipitations[i] = number.Next(0, 10);
-            //Console.Write($"{precipitations[i]} ");
         }
 
         Console.WriteLine();
@@ -73,31 +68,14 @@ public static class WeatherInformation
 
         Console.WriteLine("Индексы дней с заморозками и увеличением осадков по сравнению с предыдущим днем: ");
 
-        for (int i = 0; i < temperatures.Length; i++)
+        for (int i = 1; i < temperatures.Length; i++)
         {
             if (temperatures[i] < 0 && precipitations[i] > precipitations[i - 1])
             {
-                int Proverka = precipitations.ToList().IndexOf(precipitations[i]);
-                Console.Write($"{Proverka}, ");
+                int frostsAndHeavyPrecipitation = i;
+                Console.Write($"{frostsAndHeavyPrecipitation}, ");
             }
         }
-
-
-        /*foreach (int A in temperatures)
-        {
-            if (A < 0)
-            {
-                for (var i = 1; i < precipitations.Length; i++)
-                {
-                    if (precipitations[i] > precipitations[i - 1])
-                    {
-                        int Proverka = precipitations.ToList().IndexOf(precipitations[i]);
-                        Console.WriteLine("Индексы дней с заморозками и увеличением осадков по сравнению с предыдущим днем: ");
-                        Console.WriteLine(Proverka);
-                    }
-                }
-            }
-        }*/
 
     }
 }
